@@ -7,8 +7,10 @@ import Expenses from './pages/home';
 import Login from './pages/login/Login';
 import Register from './pages/Register';
 import HelpingRouter from './helping/helpingRouter';
+import ENV from './config/env';
 
 function App() {
+  console.log('Backend URL:', ENV.baseURL); // Log the backend URL to verify it's being read correctly
   return (
     <BrowserRouter>
       <Routes>

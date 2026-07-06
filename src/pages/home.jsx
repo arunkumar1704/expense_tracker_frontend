@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import API from '../api/axios';
+import ENV from '../config/env';
 import Pagination from '../components/Pagination';
 import ExpensePieChart from '../chart/pieChart';
 import './home.css';
+
+const backendURL = ENV.baseURL;
 
 const EXPENSE_TYPE_ICONS = {
   'Daily Expense': '📝',
@@ -59,10 +62,8 @@ function Dashboard() {
   const [preview, setPreview] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('All');
-  const [draftColumnFilters, setDraftColumnFilters] =
-    useState(initialColumnFilters);
-  const [committedColumnFilters, setCommittedColumnFilters] =
-    useState(initialColumnFilters);
+  const [draftColumnFilters, setDraftColumnFilters] = useState(initialColumnFilters);
+  const [committedColumnFilters, setCommittedColumnFilters] =useState(initialColumnFilters);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalRecords, setTotalRecords] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -261,7 +262,7 @@ function Dashboard() {
       image: null,
     });
     setPreview(
-      expense.image ? `http://localhost:2001/image/${expense.image}` : null
+      expense.image ? `${backendURL}/image/${expense.image}` : null
     );
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -616,12 +617,12 @@ function Dashboard() {
                           <td>
                             {item.image ? (
                               <a
-                                href={`http://localhost:2001/image/${item.image}`}
+                                href={`${backendURL}/image/${item.image}`}
                                 target="_blank"
                                 rel="noreferrer"
                               >
                                 <img
-                                  src={`http://localhost:2001/image/${item.image}`}
+                                  src={`${backendURL}/image/${item.image}`}
                                   alt="bill"
                                   className="bill-thumb"
                                 />

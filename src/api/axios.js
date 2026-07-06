@@ -1,8 +1,10 @@
 import axios from 'axios';
+import ENV from '../config/env';
 
 const API = axios.create({
-  baseURL: 'http://localhost:2001/api',
+  baseURL: ENV.baseAPI,
 });
+
 
 // Attach token automatically to every request
 API.interceptors.request.use((config) => {

@@ -14,7 +14,7 @@
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
   gap: 16px;
