@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import API from '../../api/axios';
+import API, { getApiErrorMessage } from '../../api/axios';
 import './login.css';
 
 function Login() {
@@ -55,7 +55,7 @@ function Login() {
         }
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Something went wrong');
+      toast.error(error.userMessage || getApiErrorMessage(error, 'Login failed'));
     } finally {
       setIsLoading(false);
     }
@@ -72,7 +72,7 @@ function Login() {
         toast.info('OTP resent to your email!');
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to resend OTP');
+      toast.error(error.userMessage || getApiErrorMessage(error, 'Failed to resend OTP'));
     } finally {
       setIsLoading(false);
     }

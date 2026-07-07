@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import API from '../api/axios';
+import API, { getApiErrorMessage } from '../api/axios';
 import './login/login.css';
 
 function Register() {
@@ -51,7 +51,7 @@ function Register() {
         setTimeout(() => navigate('/login'), 1500);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
+      toast.error(error.userMessage || getApiErrorMessage(error, 'Registration failed'));
     } finally {
       setIsLoading(false);
     }
